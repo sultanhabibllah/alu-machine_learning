@@ -45,13 +45,9 @@ class Normal:
         pi = 3.1415926536
         z = (x - self.mean) / (self.stddev * (2 ** 0.5))
 
-        result = 0
-        for n in range(100):
-            factorial = 1
-            for i in range(1, n + 1):
-                factorial *= i
+        erf = (2 / pi ** 0.5) * (
+            z - z ** 3 / 3 + z ** 5 / 10
+            - z ** 7 / 42 + z ** 9 / 216
+        )
 
-            result += ((-1) ** n * z ** (2 * n + 1) /
-                       (factorial * (2 * n + 1)))
-
-        return 0.5 * (1 + (2 / pi ** 0.5) * result)
+        return (1 + erf) / 2
