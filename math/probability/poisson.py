@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Poisson distribution module."""
+"""Module for the Poisson distribution."""
 
 
 class Poisson:
-    """Represents a Poisson distribution."""
+    """Represent a Poisson probability distribution."""
 
     def __init__(self, data=None, lambtha=1.):
-        """Initialize a Poisson distribution."""
+        """Initialize the Poisson distribution."""
         if data is None:
             if lambtha <= 0:
                 raise ValueError("lambtha must be a positive value")
@@ -18,3 +18,19 @@ class Poisson:
                 raise ValueError("data must contain multiple values")
 
             self.lambtha = float(sum(data) / len(data))
+
+    def pmf(self, k):
+        """Calculate the probability of observing k occurrences."""
+        k = int(k)
+
+        if k < 0:
+            return 0
+
+        e = 2.7182818285
+        factorial = 1
+
+        for i in range(1, k + 1):
+            factorial *= i
+
+        return (e ** (-self.lambtha) *
+                self.lambtha ** k / factorial)
