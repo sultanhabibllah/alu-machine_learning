@@ -15,7 +15,6 @@ class Normal:
         else:
             if not isinstance(data, list):
                 raise TypeError("data must be a list")
-
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
 
@@ -43,10 +42,11 @@ class Normal:
 
     def cdf(self, x):
         """Calculate the normal cumulative distribution function."""
+        pi = 3.1415926536
         z = (x - self.mean) / (self.stddev * (2 ** 0.5))
 
         result = 0
-        for n in range(50):
+        for n in range(100):
             factorial = 1
             for i in range(1, n + 1):
                 factorial *= i
@@ -54,7 +54,4 @@ class Normal:
             result += ((-1) ** n * z ** (2 * n + 1) /
                        (factorial * (2 * n + 1)))
 
-        pi = 3.1415926536
-        erf = (2 / pi ** 0.5) * result
-
-        return 0.5 * (1 + erf)
+        return 0.5 * (1 + (2 / pi ** 0.5) * result)
