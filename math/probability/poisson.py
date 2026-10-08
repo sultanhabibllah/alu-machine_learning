@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Module for the Poisson distribution."""
+"""Module for the Poisson probability distribution."""
 
 
 class Poisson:
@@ -20,7 +20,7 @@ class Poisson:
             self.lambtha = float(sum(data) / len(data))
 
     def pmf(self, k):
-        """Calculate the probability of observing k occurrences."""
+        """Calculate the Poisson probability mass function."""
         k = int(k)
 
         if k < 0:
@@ -34,3 +34,17 @@ class Poisson:
 
         return (e ** (-self.lambtha) *
                 self.lambtha ** k / factorial)
+
+    def cdf(self, k):
+        """Calculate the Poisson cumulative distribution function."""
+        k = int(k)
+
+        if k < 0:
+            return 0
+
+        probability = 0
+
+        for i in range(k + 1):
+            probability += self.pmf(i)
+
+        return probability
