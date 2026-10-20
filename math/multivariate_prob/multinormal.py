@@ -36,7 +36,7 @@ class MultiNormal:
         det = np.linalg.det(self.cov)
 
         exponent = -0.5 * np.matmul(
-            np.matmul(diff.T, inv), diff
+            diff.T, np.matmul(inv, diff)
         )[0, 0]
 
         numerator = np.exp(exponent)
