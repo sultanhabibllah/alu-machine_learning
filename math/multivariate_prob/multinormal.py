@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """Defines a multivariate normal distribution."""
 
@@ -21,4 +20,3 @@ class MultiNormal:
         self.mean = np.mean(data, axis=1, keepdims=True)
         centered = data - self.mean
         self.cov = np.matmul(centered, centered.T) / (n - 1)
-
